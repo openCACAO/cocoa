@@ -57,8 +57,8 @@ namespace Covid19Radar
             Xamarin.ExposureNotifications.ExposureNotification.Init();
             Xamarin.ExposureNotifications.LoggerService.Instance = LoggerService;
 
-            var enabled = await Xamarin.ExposureNotifications.ExposureNotification.IsEnabledAsync();
-            App.LoggerService.Info($"IsEnabledAsync is {enabled}");
+            // var enabled = await Xamarin.ExposureNotifications.ExposureNotification.IsEnabledAsync();
+            // App.LoggerService.Info($"IsEnabledAsync is {enabled}");
 
             // Local Notification tap event listener
             //NotificationCenter.Current.NotificationTapped += OnNotificationTapped;
