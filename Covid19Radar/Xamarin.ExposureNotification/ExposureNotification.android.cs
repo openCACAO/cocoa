@@ -31,10 +31,9 @@ namespace Xamarin.ExposureNotifications
 
 		static async Task<ExposureConfiguration> GetConfigurationAsync()
 		{
-			// ログを入れる
-			LoggerService.StartMethod();
-
+			LogEx.StartMethod();
 			var c = await Handler.GetConfigurationAsync();
+			LogEx.EndMethod();
 
 
 			return new ExposureConfiguration.ExposureConfigurationBuilder()
@@ -69,8 +68,7 @@ namespace Xamarin.ExposureNotifications
 
 		static async Task<T> ResolveApi<T>(int requestCode, Func<Task<T>> apiCall)
 		{
-			// ログを入れる
-			LoggerService.StartMethod();
+			LogEx.StartMethod();
 			try
 			{
 				return await apiCall();
@@ -97,16 +95,14 @@ namespace Xamarin.ExposureNotifications
 
 		static void PlatformInit()
 		{
-			// ログを入れる
-			LoggerService.StartMethod(); // Init 前なのでこれ書き出せない
+			LogEx.StartMethod();
 			_ = ScheduleFetchAsync();
 		}
 
 		static Task PlatformStart()
 			=> ResolveApi<object>(requestCodeStartExposureNotification, async () =>
 				{
-					// ログを入れる
-					LoggerService.StartMethod();
+					LogEx.StartMethod();
 					await Instance.StartAsync();
 					return default;
 				});
@@ -114,8 +110,7 @@ namespace Xamarin.ExposureNotifications
 		static Task PlatformStop()
 			=> ResolveApi<object>(requestCodeStartExposureNotification, async () =>
 				{
-					// ログを入れる
-					LoggerService.StartMethod();
+					LogEx.StartMethod();
 					await Instance.StopAsync();
 					return default;
 				});
@@ -215,10 +210,8 @@ namespace Xamarin.ExposureNotifications
 
 		static async Task<Status> PlatformGetStatusAsync()
 		{
-			// ログを入れる
-			LoggerService.StartMethod();
+			LogEx.StartMethod();
 			var bt = BluetoothAdapter.DefaultAdapter;
-
 			if (bt == null || !bt.IsEnabled)
 				return Status.BluetoothOff;
 

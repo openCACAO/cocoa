@@ -14,46 +14,53 @@ namespace Xamarin.ExposureNotification
     {
         public Task<IList<ExposureInformation>> GetExposureInformationAsync(string token)
         {
-            Xamarin.ExposureNotifications.LoggerService.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.StartMethod();
             var items = new List<ExposureInformation>();
+            Xamarin.ExposureNotifications.LogEx.EndMethod();
             return new Task<IList<ExposureInformation>>(
                 () => { return items; });
         }
 
         public Task<ExposureSummary> GetExposureSummaryAsync(string token)
         {
-            Xamarin.ExposureNotifications.LoggerService.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.StartMethod();
             var item = new ExposureSummary.ExposureSummaryBuilder().Build();
+            Xamarin.ExposureNotifications.LogEx.EndMethod();
             return new Task<ExposureSummary>(
                 () => item);
         }
         public Task<IList<TemporaryExposureKey>> GetTemporaryExposureKeyHistoryAsync()
         {
-            Xamarin.ExposureNotifications.LoggerService.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.StartMethod();
             var items = new List<TemporaryExposureKey>();
+            Xamarin.ExposureNotifications.LogEx.EndMethod();
             return new Task<IList<TemporaryExposureKey>>(
                 () => items);
         }
 
         public Task StartAsync()
         {
-            Xamarin.ExposureNotifications.LoggerService.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.EndMethod();
             return new Task(() => { });
         }
         public Task StopAsync()
         {
-            Xamarin.ExposureNotifications.LoggerService.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.EndMethod();
             return new Task(() => { });
         }
         public Task<bool> IsEnabledAsync()
         {
-            Xamarin.ExposureNotifications.LoggerService.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.EndMethod();
             return new Task<bool>(() => true);
         }
 
         public Task ProvideDiagnosisKeysAsync(List<Java.IO.File> files, ExposureConfiguration config, string guid )
         {
-            Xamarin.ExposureNotifications.LoggerService.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.StartMethod();
+            Xamarin.ExposureNotifications.LogEx.EndMethod();
             return new Task<bool>(() => true);
         }
     }

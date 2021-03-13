@@ -6,106 +6,128 @@ using System.Text;
 namespace Xamarin.ExposureNotifications
 {
     /// <summary>
-    /// Xamarin.ExposureNotification 内で利用する LoggerService
+    /// System.Diagnostics.Trace の拡張メソッド
     /// </summary>
-    public class LoggerService
+    public static class LogEx
     {
-        private static ILoggerServiceInner _target;
-        public static ILoggerServiceInner Instance
+        private enum LogLevel
         {
-            get => _target;
-            set => _target = value;
+            Verbose,
+            Debug,
+            Info,
+            Warning,
+            Error
         }
+
         public static void StartMethod(
             [CallerMemberName] string method = "",
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
-        { _target?.StartMethod(method, filePath, lineNumber); }
+        {
+            Output("Start", method, filePath, lineNumber, LogLevel.Info);
+        }
 
         public static void EndMethod(
             [CallerMemberName] string method = "",
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
-        { _target?.StartMethod(method, filePath, lineNumber); }
+        {
+            Output("End", method, filePath, lineNumber, LogLevel.Info);
+        }
+
         public static void Verbose(
             string message,
             [CallerMemberName] string method = "",
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
-        { _target?.StartMethod(method, filePath, lineNumber); }
+        {
+            Output(message, method, filePath, lineNumber, LogLevel.Verbose);
+        }
+
         public static void Debug(
             string message,
             [CallerMemberName] string method = "",
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
-        { _target?.StartMethod(method, filePath, lineNumber); }
+        {
+            Output(message, method, filePath, lineNumber, LogLevel.Debug);
+        }
+
         public static void Info(
             string message,
             [CallerMemberName] string method = "",
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
-        { _target?.StartMethod(method, filePath, lineNumber); }
+        {
+            Output(message, method, filePath, lineNumber, LogLevel.Info);
+        }
+
         public static void Warning(
             string message,
             [CallerMemberName] string method = "",
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
-        { _target?.StartMethod(method, filePath, lineNumber); }
+        {
+            Output(message, method, filePath, lineNumber, LogLevel.Warning);
+        }
+
         public static void Error(
             string message,
             [CallerMemberName] string method = "",
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
-        { _target?.StartMethod(method, filePath, lineNumber); }
+        {
+            Output(message, method, filePath, lineNumber, LogLevel.Error);
+        }
+
         public static void Exception(
             string message,
             Exception ex,
             [CallerMemberName] string method = "",
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
-        { _target?.StartMethod(method, filePath, lineNumber); }
-    }
+        {
+            Output(message + ", Exception: " + ex.ToString(), method, filePath, lineNumber, LogLevel.Error);
+        }
 
-    public interface ILoggerServiceInner
-    {
-        void StartMethod(
-            [CallerMemberName] string method = "",
-            [CallerFilePath] string filePath = "",
-            [CallerLineNumber] int lineNumber = 0);
-        void EndMethod(
-            [CallerMemberName] string method = "",
-            [CallerFilePath] string filePath = "",
-            [CallerLineNumber] int lineNumber = 0);
-        void Verbose(
-            string message,
-            [CallerMemberName] string method = "",
-            [CallerFilePath] string filePath = "",
-            [CallerLineNumber] int lineNumber = 0);
-        void Debug(
-            string message,
-            [CallerMemberName] string method = "",
-            [CallerFilePath] string filePath = "",
-            [CallerLineNumber] int lineNumber = 0);
-        void Info(
-            string message,
-            [CallerMemberName] string method = "",
-            [CallerFilePath] string filePath = "",
-            [CallerLineNumber] int lineNumber = 0);
-        void Warning(
-            string message,
-            [CallerMemberName] string method = "",
-            [CallerFilePath] string filePath = "",
-            [CallerLineNumber] int lineNumber = 0);
-        void Error(
-            string message,
-            [CallerMemberName] string method = "",
-            [CallerFilePath] string filePath = "",
-            [CallerLineNumber] int lineNumber = 0);
-        void Exception(
-            string message,
-            Exception ex,
-            [CallerMemberName] string method = "",
-            [CallerFilePath] string filePath = "",
-            [CallerLineNumber] int lineNumber = 0);
+
+        private static DateTime JstNow()
+        {
+            return TimeZoneInfo.ConvertTime(DateTime.Now, JstTimeZoneInfo());
+        }
+        private static TimeZoneInfo JstTimeZoneInfo()
+        {
+            // iOS/Android/Unix
+            try
+            {
+                return TimeZoneInfo.FindSystemTimeZoneById("Asia/Tokyo");
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                // Not iOS/Android/Unix
+            }
+
+            // Windows
+            try
+            {
+                return TimeZoneInfo.FindSystemTimeZoneById("Tokyo Standard Time");
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                // Not Windows
+            }
+
+            // Emergency fallback
+            return TimeZoneInfo.CreateCustomTimeZone("JST", new TimeSpan(9, 0, 0), "(GMT+09:00) JST", "JST");
+        }
+
+        private static void Output(string message, string method, string filePath, int lineNumber, LogLevel logLevel)
+        {
+            var now = JstNow().ToString("yyyy/MM/dd HH:mm:ss");
+            var level = logLevel.ToString();
+            var line = $"\"{now}\",\"{level}\",\"{message}\",\"{method}\",\"{filePath}\",\"{lineNumber}\",\"Android\",\"\",\"\",\"\",\"\",\"\"";
+            System.Diagnostics.Trace.WriteLine(line);
+            return;
+        }
     }
 }
