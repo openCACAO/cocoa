@@ -27,7 +27,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug_BackTask|netstandard2.0|AnyCPU'">
-	  <DefineConstants>DEBUG;TRACE;TEST_BACKTASK</DefineConstants>
+	  <DefineConstants>TRACE;DEBUG;TEST_BACKTASK</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -53,19 +53,19 @@ namespace Covid19Radar.Droid
             }
             */
 
-            /*
             // ログ用のパスを一度取得する
             // こうしないと files フォルダが作られない
             var contextRef = new System.WeakReference<Context>(this);
             contextRef.TryGetTarget(out var c);
             var dir = c.GetExternalFilesDir(null).AbsolutePath;
-            var filename = Path.Combine(dir, $"trace-droid-{DateTime.Now.ToString("yyyyMMdd-HHmm")}.txt");
-            var tw = System.IO.File.OpenWrite(filename);
-            var tr1 = new System.Diagnostics.TextWriterTraceListener(tw);
-            DroidTrace.AutoFlush = true;
-            DroidTrace.Listeners.Add(tr1);
-            DroidTrace.WriteLine("START: " + DateTime.Now.ToString());
-            */
+            var filename = Path.Combine(dir, $"trace-dummy.txt");
+            using (var tw = System.IO.File.OpenWrite(filename))
+            {
+                using (var sw = new StreamWriter(tw))
+                {
+                    sw.WriteLine("START: " + DateTime.Now.ToString());
+                }
+            }
 
 
             //NotificationCenter.CreateNotificationChannel();
