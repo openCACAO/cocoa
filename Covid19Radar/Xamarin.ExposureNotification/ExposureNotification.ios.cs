@@ -247,7 +247,7 @@ namespace Xamarin.ExposureNotifications
 			var summary = new ExposureDetectionSummary(
 				(int)detectionSummary.DaysSinceLastExposure,
 				detectionSummary.MatchedKeyCount,
-				maxRisk,
+				(byte)maxRisk,
 				attDurTs.ToArray(),
 				sumRisk);
 

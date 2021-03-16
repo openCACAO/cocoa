@@ -1,0 +1,27 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.1.2">
+  <PropertyGroup>
+    <TargetFrameworks>Xamarin.iOS10</TargetFrameworks>
+    <AssemblyName>Xamarin.iOS.ExposureNotification.Mock</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ProcessEnums>true</ProcessEnums>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Xamarin.iOS.ExposureNotification.targets" Pack="True" PackagePath="build;buildTransitive" />
+  </ItemGroup>
+
+  <!--
+  <ItemGroup>
+    <Compile Remove="ApiDefinition.cs" />
+  </ItemGroup>
+  -->
+
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true'" />
+  </ItemGroup>
+
+</Project>

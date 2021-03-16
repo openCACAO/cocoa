@@ -24,10 +24,10 @@ namespace Xamarin.ExposureNotifications
 {
 	public static partial class ExposureNotification
 	{
-		static Xamarin.ExposureNotification.ExposureNotificationClientMock Instance => new Xamarin.ExposureNotification.ExposureNotificationClientMock();
-		// static IExposureNotificationClient instance;
-		//		static IExposureNotificationClient Instance
-		//			=> instance ??= Nearby.GetExposureNotificationClient(Application.Context);
+		// static Xamarin.ExposureNotification.ExposureNotificationClientMock Instance => new Xamarin.ExposureNotification.ExposureNotificationClientMock();
+		static IExposureNotificationClient instance;
+				static IExposureNotificationClient Instance
+					=> instance ??= Nearby.GetExposureNotificationClient(Application.Context);
 
 		static async Task<ExposureConfiguration> GetConfigurationAsync()
 		{
