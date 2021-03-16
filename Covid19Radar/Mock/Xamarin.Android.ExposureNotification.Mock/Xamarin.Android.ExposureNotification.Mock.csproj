@@ -13,6 +13,7 @@
     <AndroidClassParser>class-parse</AndroidClassParser>
     <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
     <LangVersion>8.0</LangVersion>
+    <Configurations>Debug;Release;ENMock</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

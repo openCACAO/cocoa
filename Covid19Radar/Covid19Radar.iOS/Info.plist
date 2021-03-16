@@ -28,9 +28,9 @@
 	<key>CFBundleName</key>
 	<string>Covid19Radar</string>
 	<key>CFBundleDisplayName</key>
-	<string>接触確認アプリ</string>
+	<string>opencacao demo</string>
 	<key>CFBundleIdentifier</key>
-	<string>APP_PACKAGE_NAME</string>
+	<string>net.moonmile.opencacao.mock.demo</string>
 	<key>CFBundleVersion</key>
 	<string>1.1</string>
 	<key>CFBundleIconFiles</key>
@@ -75,7 +75,7 @@
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>CFBundleShortVersionString</key>
-	<string>APP_VERSION</string>
+	<string>1.0</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
 	<key>UIStatusBarStyle</key>

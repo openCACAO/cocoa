@@ -50,6 +50,14 @@ namespace Covid19Radar.Services
         // POST /api/Register - Register User
         public async Task<bool> PostRegisterUserAsync()
         {
+            // デバッグのため
+            // 同意のレジストをスキップする
+            loggerService.StartMethod();
+            loggerService.Debug(" skip /register ");
+            loggerService.EndMethod();
+            return true;
+
+
 #if TEST_BACKTASK
             loggerService.StartMethod();
             loggerService.Debug(" skip /register ");

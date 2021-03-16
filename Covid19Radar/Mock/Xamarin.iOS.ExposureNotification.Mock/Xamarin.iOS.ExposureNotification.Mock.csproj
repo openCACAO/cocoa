@@ -4,6 +4,7 @@
     <AssemblyName>Xamarin.iOS.ExposureNotification.Mock</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ProcessEnums>true</ProcessEnums>
+    <Configurations>Debug;Release;ENMock</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
